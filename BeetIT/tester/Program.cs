@@ -20,8 +20,8 @@ namespace tester
 
             player.StartRecording();
             
-            await player.PlaySoundAsync(@"./assets/applause.mp3");
-            await player.PlaySoundAsync(@"./assets/laugh-evil-1.mp3");
+            await player.PlaySoundAsync(@"./assets/applause.mp3", 0);
+            await player.PlaySoundAsync(@"./assets/laugh-evil-1.mp3", 0);
 
             Console.WriteLine("Sounds has finished playing. Press enter to close the application...");
             Console.ReadLine();

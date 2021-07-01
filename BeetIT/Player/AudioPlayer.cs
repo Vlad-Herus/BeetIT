@@ -11,29 +11,21 @@ namespace Player
         private WaveInEvent recorder;
         private BufferedWaveProvider bufferedWaveProvider;
         private WaveOut player;
-        private int? _outDeviceId;
-        private int OutDeviceId
+
+        private int VirtualOutDeviceNumber
         {
             get
             {
-
-                if (_outDeviceId == null)
+                for (int n = -1; n < WaveOut.DeviceCount; n++)
                 {
-                    for (int n = -1; n < WaveOut.DeviceCount; n++)
+                    var caps = WaveOut.GetCapabilities(n);
+                    if (caps.ProductName.StartsWith("CABLE"))
                     {
-                        var caps = WaveOut.GetCapabilities(n);
-                        if (caps.ProductName.StartsWith("CABLE"))
-                        {
-                            _outDeviceId = n;
-                            break;
-                        }
+                        return n;
                     }
-
-                    if (_outDeviceId == null)
-                        throw new Exception("Failed to find VB Virtual Cable Input device");
                 }
 
-                return _outDeviceId.Value;
+                throw new Exception("Failed to find VB Virtual Cable Input device");
             }
         }
 
@@ -49,7 +41,7 @@ namespace Player
 
             // set up playback
             player = new WaveOut();
-            player.DeviceNumber = OutDeviceId;
+            player.DeviceNumber = VirtualOutDeviceNumber;
             player.Init(bufferedWaveProvider);
 
             // begin playback & record
@@ -70,25 +62,34 @@ namespace Player
             bufferedWaveProvider.AddSamples(waveInEventArgs.Buffer, 0, waveInEventArgs.BytesRecorded);
         }
 
-        public async Task PlaySoundAsync(string path)
+        public async Task PlaySoundAsync(string path, int? physicalOutDeviceNumber = null)
         {
             using (var file = File.OpenRead(path))
             {
-                await PlaySoundAsync(file);
+                await PlaySoundAsync(file, physicalOutDeviceNumber);
             }
         }
 
-        public async Task PlaySoundAsync(Stream audioStream)
+        public async Task PlaySoundAsync(Stream audioStream, int? physicalOutDeviceNumber = null)
         {
             using (var rdr = new Mp3FileReader(audioStream))
             using (var wavStream = WaveFormatConversionStream.CreatePcmStream(rdr))
             using (var baStream = new BlockAlignReductionStream(wavStream))
+            using (var virtualWaveOut = new WaveOut(WaveCallbackInfo.FunctionCallback()))
             using (var waveOut = new WaveOut(WaveCallbackInfo.FunctionCallback()))
             {
-                waveOut.DeviceNumber = OutDeviceId;
-                waveOut.Init(baStream);
-                waveOut.Play();
-                while (waveOut.PlaybackState == PlaybackState.Playing)
+                virtualWaveOut.DeviceNumber = VirtualOutDeviceNumber;
+                virtualWaveOut.Init(baStream);
+                virtualWaveOut.Play();
+
+                if (physicalOutDeviceNumber.HasValue)
+                {
+                    waveOut.DeviceNumber = physicalOutDeviceNumber.Value;
+                    waveOut.Init(baStream);
+                    waveOut.Play();
+                }
+
+                while (virtualWaveOut.PlaybackState == PlaybackState.Playing || waveOut.PlaybackState == PlaybackState.Playing)
                 {
                     await Task.Delay(100);
                 }
