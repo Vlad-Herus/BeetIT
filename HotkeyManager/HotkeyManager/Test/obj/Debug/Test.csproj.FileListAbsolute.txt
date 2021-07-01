@@ -1,0 +1,11 @@
+D:\Github_Root\BeetIT\HotkeyManager\HotkeyManager\Test\bin\Debug\Test.exe.config
+D:\Github_Root\BeetIT\HotkeyManager\HotkeyManager\Test\bin\Debug\Test.exe
+D:\Github_Root\BeetIT\HotkeyManager\HotkeyManager\Test\bin\Debug\Test.pdb
+D:\Github_Root\BeetIT\HotkeyManager\HotkeyManager\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
+D:\Github_Root\BeetIT\HotkeyManager\HotkeyManager\Test\obj\Debug\Test.exe
+D:\Github_Root\BeetIT\HotkeyManager\HotkeyManager\Test\obj\Debug\Test.pdb
+D:\Github_Root\BeetIT\HotkeyManager\HotkeyManager\Test\bin\Debug\HotkeyManager.dll
+D:\Github_Root\BeetIT\HotkeyManager\HotkeyManager\Test\bin\Debug\HotkeyManager.pdb
+D:\Github_Root\BeetIT\HotkeyManager\HotkeyManager\Test\bin\Debug\HotkeyManager.dll.config
+D:\Github_Root\BeetIT\HotkeyManager\HotkeyManager\Test\obj\Debug\Test.csproj.AssemblyReference.cache
+D:\Github_Root\BeetIT\HotkeyManager\HotkeyManager\Test\obj\Debug\Test.csproj.CopyComplete
