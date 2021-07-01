@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Player", "Player\Player.csproj", "{8E009EE1-9BE2-4823-AFEA-A1225D70502F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tester", "tester\tester.csproj", "{3456E342-88EA-4B94-AAA2-501D773763BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E009EE1-9BE2-4823-AFEA-A1225D70502F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E009EE1-9BE2-4823-AFEA-A1225D70502F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E009EE1-9BE2-4823-AFEA-A1225D70502F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E009EE1-9BE2-4823-AFEA-A1225D70502F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3456E342-88EA-4B94-AAA2-501D773763BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3456E342-88EA-4B94-AAA2-501D773763BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3456E342-88EA-4B94-AAA2-501D773763BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3456E342-88EA-4B94-AAA2-501D773763BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {323562F2-80E1-45D2-83C1-DAA69B4192E5}
+	EndGlobalSection
+EndGlobal
