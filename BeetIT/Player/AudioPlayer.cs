@@ -10,7 +10,6 @@ namespace Player
     {
         private WaveInEvent recorder;
         private BufferedWaveProvider bufferedWaveProvider;
-        private SavingWaveProvider savingWaveProvider;
         private WaveOut player;
         private int? _outDeviceId;
         private int OutDeviceId
@@ -47,12 +46,11 @@ namespace Player
 
             // set up our signal chain
             bufferedWaveProvider = new BufferedWaveProvider(recorder.WaveFormat);
-            savingWaveProvider = new SavingWaveProvider(bufferedWaveProvider, "temp.wav");
 
             // set up playback
             player = new WaveOut();
             player.DeviceNumber = OutDeviceId;
-            player.Init(savingWaveProvider);
+            player.Init(bufferedWaveProvider);
 
             // begin playback & record
             player.Play();
@@ -65,8 +63,6 @@ namespace Player
             recorder.StopRecording();
             // stop playback
             player.Stop();
-            // finalise the WAV file
-            savingWaveProvider.Dispose();
         }
 
         private void RecorderOnDataAvailable(object sender, WaveInEventArgs waveInEventArgs)
