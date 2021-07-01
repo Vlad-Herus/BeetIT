@@ -17,6 +17,16 @@ namespace Test
             {
                 Console.WriteLine("aaaa");
             }));
+
+            Key.HotKeyManager.RegisterHotKey(Keys.PageUp, KeyModifiers.None, new Action<Keys, KeyModifiers>((key, mod) =>
+            {
+                Console.WriteLine("aaaa");
+            }));
+
+            while (true)
+            {
+                Console.ReadLine();
+            }
         }
     }
 }
