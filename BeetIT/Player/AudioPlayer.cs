@@ -2,11 +2,16 @@
 using System;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Player
 {
     public class AudioPlayer
     {
+        private WaveInEvent recorder;
+        private BufferedWaveProvider bufferedWaveProvider;
+        private SavingWaveProvider savingWaveProvider;
+        private WaveOut player;
         private int? _outDeviceId;
         private int OutDeviceId
         {
@@ -18,7 +23,7 @@ namespace Player
                     for (int n = -1; n < WaveOut.DeviceCount; n++)
                     {
                         var caps = WaveOut.GetCapabilities(n);
-                        if (caps.ProductName.StartsWith("VoiceMeeter Input"))
+                        if (caps.ProductName.StartsWith("CABLE"))
                         {
                             _outDeviceId = n;
                             break;
@@ -26,23 +31,58 @@ namespace Player
                     }
 
                     if (_outDeviceId == null)
-                        throw new Exception("Failed to find VoiceMeeter Input device");
+                        throw new Exception("Failed to find VB Virtual Cable Input device");
                 }
 
                 return _outDeviceId.Value;
             }
         }
 
+        public void StartRecording(int microphoneDeviceNumber = 0)
+        {
+            // set up the recorder
+            recorder = new WaveInEvent();
+            recorder.DeviceNumber = microphoneDeviceNumber; // Note that device number 0 represents the default device
+            recorder.DataAvailable += RecorderOnDataAvailable;
 
-        public void PlaySound(string path)
+            // set up our signal chain
+            bufferedWaveProvider = new BufferedWaveProvider(recorder.WaveFormat);
+            savingWaveProvider = new SavingWaveProvider(bufferedWaveProvider, "temp.wav");
+
+            // set up playback
+            player = new WaveOut();
+            player.DeviceNumber = OutDeviceId;
+            player.Init(savingWaveProvider);
+
+            // begin playback & record
+            player.Play();
+            recorder.StartRecording();
+        }
+
+        public void StopRecording()
+        {
+            // stop recording
+            recorder.StopRecording();
+            // stop playback
+            player.Stop();
+            // finalise the WAV file
+            savingWaveProvider.Dispose();
+        }
+
+        private void RecorderOnDataAvailable(object sender, WaveInEventArgs waveInEventArgs)
+        {
+            bufferedWaveProvider.AddSamples(waveInEventArgs.Buffer, 0, waveInEventArgs.BytesRecorded);
+        }
+
+        public async Task PlaySoundAsync(string path)
         {
             using (var file = File.OpenRead(path))
             {
-                PlaySound(file);
+                await PlaySoundAsync(file);
             }
         }
 
-        public void PlaySound(Stream audioStream)
+        public async Task PlaySoundAsync(Stream audioStream)
         {
             using (var rdr = new Mp3FileReader(audioStream))
             using (var wavStream = WaveFormatConversionStream.CreatePcmStream(rdr))
@@ -54,7 +94,7 @@ namespace Player
                 waveOut.Play();
                 while (waveOut.PlaybackState == PlaybackState.Playing)
                 {
-                    Thread.Sleep(100);
+                    await Task.Delay(100);
                 }
             }
         }

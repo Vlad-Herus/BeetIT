@@ -1,14 +1,37 @@
 ﻿using Player;
 using System;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace tester
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            new AudioPlayer().PlaySound(@"./assets/applause.mp3");
+            // Conditions to work:
+            // - Need to set the Slack/Zoom microphone to be the VB Virtual Cable Input/Speaker.
+            //   - This condition can be reduced impact if we set our application to run in the background at all times.
+            // - Default system microphone should be set to the microphone you'd normally use for Slack/Zoom.
+            //   - Can be fixed with a UI that provide an option
+
+            var player = new AudioPlayer();
+
+            Console.WriteLine("Start Recording");
+
+            var recorderThread = new Thread(() => {
+                player.StartRecording();
+            });
+            recorderThread.Start();
+            
+            await player.PlaySoundAsync(@"./assets/applause.mp3");
+            await player.PlaySoundAsync(@"./assets/laugh-evil-1.mp3");
+
+            Console.WriteLine("Sounds has finished playing. Press enter to close the application...");
+            Console.ReadLine();
+
+            player.StopRecording();
         }
     }
 }
