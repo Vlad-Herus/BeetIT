@@ -9,4 +9,13 @@
     <ProjectReference Include="..\Player\Player.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="assets\applause.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="assets\laugh-evil-1.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
