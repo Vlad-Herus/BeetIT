@@ -1,7 +1,5 @@
 ﻿using Player;
 using System;
-using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace tester
@@ -20,10 +18,7 @@ namespace tester
 
             Console.WriteLine("Start Recording");
 
-            var recorderThread = new Thread(() => {
-                player.StartRecording();
-            });
-            recorderThread.Start();
+            player.StartRecording();
             
             await player.PlaySoundAsync(@"./assets/applause.mp3");
             await player.PlaySoundAsync(@"./assets/laugh-evil-1.mp3");
