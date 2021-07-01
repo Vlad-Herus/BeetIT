@@ -8,7 +8,7 @@ namespace tester
     {
         static void Main(string[] args)
         {
-            new AudioPlayer().PlaySound(@"D:\Music\Lustra - Scotty Doesn't Know.mp3");
+            new AudioPlayer().PlaySound(@"D:\Music\Lustra - Scotty Doesn't Know_q.mp3");
         }
     }
 }

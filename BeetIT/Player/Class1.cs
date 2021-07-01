@@ -7,18 +7,39 @@ namespace Player
 {
     public class AudioPlayer
     {
+        private int? _outDeviceId;
+        private int OutDeviceId
+        {
+            get
+            {
+
+                if (_outDeviceId == null)
+                {
+                    for (int n = -1; n < WaveOut.DeviceCount; n++)
+                    {
+                        var caps = WaveOut.GetCapabilities(n);
+                        if (caps.ProductName.StartsWith("VoiceMeeter Input"))
+                        {
+                            _outDeviceId = n;
+                            break;
+                        }
+                    }
+
+                    if (_outDeviceId == null)
+                        throw new Exception("Failed to find VoiceMeeter Input device");
+                }
+
+                return _outDeviceId.Value;
+            }
+        }
+
 
         public void PlaySound(string path)
         {
-            for (int n = -1; n < WaveOut.DeviceCount; n++)
+            using (var file = System.IO.File.OpenRead(path))
             {
-                var caps = WaveOut.GetCapabilities(n);
-                Console.WriteLine($"{n}: {caps.ProductName}");
+                PlaySound(file);
             }
-            //using (var file = System.IO.File.OpenRead(path))
-            //{
-            //    PlaySound(file);
-            //}
         }
 
         public void PlaySound(Stream audioStream)
@@ -28,6 +49,7 @@ namespace Player
             using (var baStream = new BlockAlignReductionStream(wavStream))
             using (var waveOut = new WaveOut(WaveCallbackInfo.FunctionCallback()))
             {
+                waveOut.DeviceNumber = OutDeviceId;
                 waveOut.Init(baStream);
                 waveOut.Play();
                 while (waveOut.PlaybackState == PlaybackState.Playing)
@@ -36,7 +58,5 @@ namespace Player
                 }
             }
         }
-
-
     }
 }
