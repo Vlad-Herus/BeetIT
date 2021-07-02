@@ -66,7 +66,8 @@ namespace Player
         {
             using (var file = File.OpenRead(path))
             {
-                await PlaySoundAsync(file, physicalOutDeviceNumber);
+                await PlaySoundAsync(file, physicalOutDeviceNumber)
+                    .ConfigureAwait(false);
             }
         }
 
@@ -91,7 +92,8 @@ namespace Player
 
                 while (virtualWaveOut.PlaybackState == PlaybackState.Playing || waveOut.PlaybackState == PlaybackState.Playing)
                 {
-                    await Task.Delay(100);
+                    await Task.Delay(100)
+                        .ConfigureAwait(false);
                 }
             }
         }

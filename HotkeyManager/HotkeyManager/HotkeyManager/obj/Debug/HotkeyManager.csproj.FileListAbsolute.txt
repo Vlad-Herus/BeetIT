@@ -1,7 +1,0 @@
-D:\Github_Root\BeetIT\HotkeyManager\HotkeyManager\HotkeyManager\bin\Debug\HotkeyManager.pdb
-D:\Github_Root\BeetIT\HotkeyManager\HotkeyManager\HotkeyManager\obj\Debug\HotkeyManager.csproj.AssemblyReference.cache
-D:\Github_Root\BeetIT\HotkeyManager\HotkeyManager\HotkeyManager\obj\Debug\HotkeyManager.csproj.CoreCompileInputs.cache
-D:\Github_Root\BeetIT\HotkeyManager\HotkeyManager\HotkeyManager\obj\Debug\HotkeyManager.pdb
-D:\Github_Root\BeetIT\HotkeyManager\HotkeyManager\HotkeyManager\bin\Debug\HotkeyManager.dll.config
-D:\Github_Root\BeetIT\HotkeyManager\HotkeyManager\HotkeyManager\bin\Debug\HotkeyManager.dll
-D:\Github_Root\BeetIT\HotkeyManager\HotkeyManager\HotkeyManager\obj\Debug\HotkeyManager.dll

@@ -7,6 +7,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Player", "Player\Player.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tester", "tester\tester.csproj", "{3456E342-88EA-4B94-AAA2-501D773763BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotkeyManager", "HotkeyManager\HotkeyManager.csproj", "{8CF278BB-A872-4CC9-AA8D-3E9F3ACA9D88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Runner", "Runner\Runner.csproj", "{CC9F0BC0-DEE5-4D21-93DD-BD4570BB07BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F779B1DD-1D11-443F-B8E9-0B97906D9671}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{2BE42892-FC1E-4D85-86F0-1EFC23EEA742}"
+	ProjectSection(SolutionItems) = preProject
+		assets\applause.mp3 = assets\applause.mp3
+		assets\laugh-evil-1.mp3 = assets\laugh-evil-1.mp3
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +33,20 @@ Global
 		{3456E342-88EA-4B94-AAA2-501D773763BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3456E342-88EA-4B94-AAA2-501D773763BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3456E342-88EA-4B94-AAA2-501D773763BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CF278BB-A872-4CC9-AA8D-3E9F3ACA9D88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CF278BB-A872-4CC9-AA8D-3E9F3ACA9D88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CF278BB-A872-4CC9-AA8D-3E9F3ACA9D88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CF278BB-A872-4CC9-AA8D-3E9F3ACA9D88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC9F0BC0-DEE5-4D21-93DD-BD4570BB07BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC9F0BC0-DEE5-4D21-93DD-BD4570BB07BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC9F0BC0-DEE5-4D21-93DD-BD4570BB07BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC9F0BC0-DEE5-4D21-93DD-BD4570BB07BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2BE42892-FC1E-4D85-86F0-1EFC23EEA742} = {F779B1DD-1D11-443F-B8E9-0B97906D9671}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {323562F2-80E1-45D2-83C1-DAA69B4192E5}

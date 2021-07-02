@@ -18,4 +18,8 @@
     </None>
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="mkdir &quot;$(TargetDir)assets&quot;&#xD;&#xA;copy &quot;$(ProjectDir)..\assets&quot; &quot;$(TargetDir)assets\&quot;" />
+  </Target>
+
 </Project>
