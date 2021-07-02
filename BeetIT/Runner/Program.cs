@@ -13,13 +13,13 @@ namespace Runner
         static string _soundPath = @".\assets\{0}";
         static IEnumerable<string> _sounds = new List<string>
         {
-            "applause.mp3", // 1
-            "laugh-evil-1.mp3", // 2
-            "Hello darkness.mp3", // 3
-            "Sad Violin.mp3", // 4
-            "cricketsounds090613.mp3", // 5
-            "Woo Hoo.mp3", // 6
-            "Sad Trombone Wah Wah Wah Fail Sound Effect.mp3" // 7
+            "applause.mp3", // ALT + 1
+            "laugh-evil-1.mp3", // ALT + 2
+            "Hello darkness.mp3", // ALT + 3
+            "Sad Violin.mp3", // ALT + 4
+            "cricketsounds090613.mp3", // ALT + 5
+            "Woo Hoo.mp3", // ALT + 6
+            "Sad Trombone Wah Wah Wah Fail Sound Effect.mp3" // ALT + 7
         };
 
         static void Main(string[] args)
