@@ -14,7 +14,11 @@ namespace Runner
         static IEnumerable<string> _sounds = new List<string>
         {
             "applause.mp3",
-            "laugh-evil-1.mp3"
+            "laugh-evil-1.mp3",
+            "Hello darkness.mp3",
+            "Sad Violin.mp3",
+            "cricketsounds090613.mp3",
+            "Woo Hoo.mp3"
         };
 
         static void Main(string[] args)
@@ -44,11 +48,23 @@ namespace Runner
                             }
                         });
                         soundThread.Start();
+
+                        var virtualSoundThread = new Thread(() =>
+                        {
+                            try
+                            {
+                                player.PlaySoundOnVirtualCableAsync(string.Format(_soundPath, _sounds.ElementAt(j))).GetAwaiter().GetResult();
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.ToString());
+                            }
+                        });
+                        virtualSoundThread.Start();
                     }));
                 }
             });
             hotkeyThread.Start();
-
 
             player.StartRecording();
 
