@@ -17,7 +17,8 @@ namespace Runner
             "laugh-evil-1.mp3",
             "Hello darkness.mp3",
             "Sad Violin.mp3",
-            "cricketsounds090613.mp3"
+            "cricketsounds090613.mp3",
+            "Woo Hoo.mp3"
         };
 
         static void Main(string[] args)
