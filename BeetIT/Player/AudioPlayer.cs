@@ -1,7 +1,7 @@
 ﻿using NAudio.Wave;
+using NAudio.Wave.SampleProviders;
 using System;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Player
@@ -38,11 +38,14 @@ namespace Player
 
             // set up our signal chain
             bufferedWaveProvider = new BufferedWaveProvider(recorder.WaveFormat);
+            var volumeSampleProvider = new VolumeSampleProvider(bufferedWaveProvider.ToSampleProvider());
+            volumeSampleProvider.Volume = 2f;
 
             // set up playback
             player = new WaveOut();
+            player.DesiredLatency = 100;
             player.DeviceNumber = VirtualOutDeviceNumber;
-            player.Init(bufferedWaveProvider);
+            player.Init(volumeSampleProvider);
 
             // begin playback & record
             player.Play();
