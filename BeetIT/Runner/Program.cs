@@ -46,11 +46,23 @@ namespace Runner
                             }
                         });
                         soundThread.Start();
+
+                        var virtualSoundThread = new Thread(() =>
+                        {
+                            try
+                            {
+                                player.PlaySoundOnVirtualCableAsync(string.Format(_soundPath, _sounds.ElementAt(j))).GetAwaiter().GetResult();
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.ToString());
+                            }
+                        });
+                        virtualSoundThread.Start();
                     }));
                 }
             });
             hotkeyThread.Start();
-
 
             player.StartRecording();
 

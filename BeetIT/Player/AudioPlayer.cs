@@ -62,16 +62,16 @@ namespace Player
             bufferedWaveProvider.AddSamples(waveInEventArgs.Buffer, 0, waveInEventArgs.BytesRecorded);
         }
 
-        public async Task PlaySoundAsync(string path, int? physicalOutDeviceNumber = null)
+        public async Task PlaySoundAsync(string path, int outDeviceNumber = 0)
         {
             using (var file = File.OpenRead(path))
             {
-                await PlaySoundAsync(file, physicalOutDeviceNumber)
+                await PlaySoundAsync(file, outDeviceNumber)
                     .ConfigureAwait(false);
             }
         }
 
-        public async Task PlaySoundAsync(Stream audioStream, int? physicalOutDeviceNumber = null)
+        public async Task PlaySoundAsync(Stream audioStream, int outDeviceNumber = 0)
         {
             using (var rdr = new Mp3FileReader(audioStream))
             using (var wavStream = WaveFormatConversionStream.CreatePcmStream(rdr))
@@ -79,23 +79,30 @@ namespace Player
             using (var virtualWaveOut = new WaveOut(WaveCallbackInfo.FunctionCallback()))
             using (var waveOut = new WaveOut(WaveCallbackInfo.FunctionCallback()))
             {
-                virtualWaveOut.DeviceNumber = VirtualOutDeviceNumber;
-                virtualWaveOut.Init(baStream);
-                virtualWaveOut.Play();
+                waveOut.DeviceNumber = outDeviceNumber;
+                waveOut.Init(baStream);
+                waveOut.Play();
 
-                if (physicalOutDeviceNumber.HasValue)
-                {
-                    waveOut.DeviceNumber = physicalOutDeviceNumber.Value;
-                    waveOut.Init(baStream);
-                    waveOut.Play();
-                }
-
-                while (virtualWaveOut.PlaybackState == PlaybackState.Playing || waveOut.PlaybackState == PlaybackState.Playing)
+                while (waveOut.PlaybackState == PlaybackState.Playing)
                 {
                     await Task.Delay(100)
                         .ConfigureAwait(false);
                 }
             }
+        }
+
+        public async Task PlaySoundOnVirtualCableAsync(string path)
+        {
+            using (var file = File.OpenRead(path))
+            {
+                await PlaySoundOnVirtualCableAsync(file)
+                    .ConfigureAwait(false);
+            }
+        }
+
+        public async Task PlaySoundOnVirtualCableAsync(Stream audioStream)
+        {
+            await PlaySoundAsync(audioStream, VirtualOutDeviceNumber);
         }
     }
 }
