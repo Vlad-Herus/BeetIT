@@ -14,7 +14,9 @@ namespace Runner
         static IEnumerable<string> _sounds = new List<string>
         {
             "applause.mp3",
-            "laugh-evil-1.mp3"
+            "laugh-evil-1.mp3",
+            "Hello darkness.mp3",
+            "Sad Violin.mp3"
         };
 
         static void Main(string[] args)
